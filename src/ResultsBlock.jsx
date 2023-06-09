@@ -1,8 +1,5 @@
-import React, { useState } from 'react'
-import  styled  from 'styled-components'
-import GameBlock from './GameBlock';
-import ResultsBlock from './ResultsBlock';
-
+import React from 'react'
+import styled from 'styled-components'
 
 const questions = [
   {
@@ -62,52 +59,40 @@ const questions = [
   },
 ];
 
-const App = () => {
-
-  const [step, setStep] = useState(0);
-  const [correct, setCorrect] = useState(0);
-
-  const question = questions[step];
-  
-  const onClickVariant = (index) => {
-    console.log(step, index)
-    setStep(step + 1);
-
-    if (index === question.correct) {
-      setCorrect(correct + 1);
-    }
-  }
-
-
+const ResultsBlock = ({correct}) => {
   return (
     <Container>
-
-      { step != questions.length ? (
-        <GameBlock
-        question = {question}
-        onClickVariant = {onClickVariant}
-        step={step}
-      />
-      ) : (
-        <ResultsBlock
-          correct = {correct}
-        />
-      )
-
-      }
-      
-      
-      {/* <ResultsBlock/> */}
+      <Img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
+      <Title>Вы отгадали {correct} ответа из {questions.length}</Title>
+      <MainButton> <StyledLink href='/'>Попробовать снова</StyledLink></MainButton>
     </Container>
   )
 }
 
-export default App
+export default ResultsBlock
 
 const Container = styled.div`
-  width: 500px;
+  text-align: center;
+`;
+const Img = styled.img`
+  width: 150px;
+`;
+const Title = styled.h2`
+  margin-bottom: 0;
+`;
+const StyledLink = styled.a`
+  text-decoration: none;
+  color: #ffffff;
+`;
+const MainButton = styled.button`
+  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
   border-radius: 30px;
-  padding: 40px;
-  background-color: #fff;
-  position: relative;
+  border: 0;
+  padding: 15px 30px;
+  font-size: 20px;
+  background-color: #ff006e;
+  color: #fff;
+  margin-top: 20px;
+  cursor: pointer;
 `;
